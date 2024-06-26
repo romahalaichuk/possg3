@@ -34,16 +34,13 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 	const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 	const [tableStatus, setTableStatus] = useState("free");
 	const [currentTableName, setCurrentTableName] = useState(tableName);
-	const [paymentComplete, setPaymentComplete] = useState(false);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [adjustments, setAdjustments] = useState({
 		service: 0,
-		discount: 0, // Nowy stan dla zniżki
+		discount: 0,
 		addToBill: 0,
 		subtractFromBill: 0,
 	});
-
-	const [serviceApplied, setServiceApplied] = useState(false);
 
 	const modalRef = useRef(null);
 	const overlayRef = useRef(null);
@@ -68,7 +65,6 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 			totalAmount += itemPrice * item.quantity;
 		});
 
-		// Obliczanie sumy z uwzględnieniem zniżki
 		const discountAmount = (adjustments.discount / 100) * totalAmount;
 		totalAmount -= discountAmount;
 
@@ -78,12 +74,7 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 	useEffect(() => {
 		const storedSelectedItems = getSelectedItems(tableName);
 		setSelectedItems(storedSelectedItems);
-		if (storedSelectedItems.length > 0) {
-			setTableStatus("occupied");
-		} else {
-			setTableStatus("free");
-		}
-		setPaymentComplete(false);
+		setTableStatus(storedSelectedItems.length > 0 ? "occupied" : "free");
 	}, [tableName]);
 
 	useEffect(() => {
@@ -95,7 +86,7 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 				overlayRef.current.contains(e.target)
 			) {
 				setShowMenuItemsModal(false);
-				setShowProcentModal(false); // Dodane zamknięcie Procent modal
+				setShowProcentModal(false);
 			}
 			if (searchBarRef.current && !searchBarRef.current.contains(e.target)) {
 				setSearchResults([]);
@@ -243,9 +234,8 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 							item.extras && item.extras.length > 0
 								? Math.max(
 										item.price,
-										item.extras.reduce(
-											(max, extra) => Math.max(max, extra.price),
-											0
+										item.extras.reduce((max, extra) =>
+											Math.max(max, extra.price)
 										)
 								  )
 								: item.price,
