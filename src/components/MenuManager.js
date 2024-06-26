@@ -309,8 +309,10 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 			adjustedTotal += (adjustments.service / 100) * totalAmount;
 		}
 
+		// Apply discount if applicable
 		if (adjustments.discount > 0) {
-			adjustedTotal -= (adjustments.discount / 100) * totalAmount;
+			const discountAmount = (adjustments.discount / 100) * totalAmount;
+			adjustedTotal -= discountAmount;
 		}
 
 		// Apply add to bill adjustment if applicable
@@ -323,7 +325,7 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 			adjustedTotal -= adjustments.subtractFromBill;
 		}
 
-		return adjustedTotal.toFixed(2);
+		return adjustedTotal.toFixed(2); // Zaokrąglenie do 2 miejsc po przecinku
 	};
 
 	return (
@@ -446,11 +448,12 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 						</p>
 					)}
 					{adjustments.discount > 0 && (
-						<p style={{ color: "blue" }}>
-							Zastosowano {adjustments.discount.toFixed(2)} % zniżki (-{" "}
+						<p>
+							Zastosowano {adjustments.discount.toFixed(2)}% zniżki (-{" "}
 							{((adjustments.discount / 100) * totalAmount).toFixed(2)} zł)
 						</p>
 					)}
+
 					{adjustments.addToBill > 0 && (
 						<p style={{ color: "green" }}>
 							Dodano {adjustments.addToBill.toFixed(2)} zł do rachunku (+{" "}
