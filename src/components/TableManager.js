@@ -26,7 +26,7 @@ const TableManager = () => {
 		if (storedTables) {
 			setTables(storedTables);
 		} else {
-			initializeTables(); // Initialize tables if no data found
+			initializeTables();
 		}
 
 		const storedWynosTables = loadDataFromLocalStorage(
