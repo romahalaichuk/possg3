@@ -1,0 +1,64 @@
+.dodatki {
+	margin-top: 10px;
+}
+
+.dodatki button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 6px 12px; /* Zmniejszono padding */
+	border-radius: 4px;
+	cursor: pointer;
+	margin-bottom: 10px;
+	font-size: 10px; /* Zmniejszono rozmiar czcionki */
+}
+
+.dodatki button:hover {
+	background-color: #0056b3;
+}
+
+.dodatki ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.dodatki ul li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px;
+	border-bottom: 1px solid #eee;
+}
+
+.dodatki ul li button {
+	background-color: #dc3545;
+	color: white;
+	border: none;
+	padding: 3px 6px; /* Zmniejszono padding */
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 10px; /* Zmniejszono rozmiar czcionki */
+}
+
+.dodatki ul li button:hover {
+	background-color: #c82333;
+}
+
+.dodatki .extra-buttons {
+	display: flex;
+	gap: 5px;
+	margin-top: 5px;
+}
+
+.dodatki .extra-buttons button {
+	background-color: #f0f0f0;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.dodatki .extra-buttons button:hover {
+	background-color: #e0e0e0;
+}

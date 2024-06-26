@@ -1,0 +1,43 @@
+.table {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	height: 100px;
+	margin: 10px;
+	border-radius: 8px;
+	font-size: 1.2rem;
+	cursor: pointer;
+	user-select: none;
+	transition: background-color 0.3s, transform 0.3s;
+	overflow: hidden;
+	position: relative;
+}
+
+.table:hover {
+	transform: scale(1.25);
+}
+
+.table-name {
+	text-align: center;
+	width: 100%;
+	padding: 5px;
+	box-sizing: border-box;
+	word-wrap: break-word;
+	white-space: normal;
+}
+
+.table-free {
+	background-color: green;
+	color: white;
+}
+
+.table-occupied {
+	background-color: red;
+	color: black;
+}
+
+.table-special {
+	background-color: blue;
+	color: white;
+}

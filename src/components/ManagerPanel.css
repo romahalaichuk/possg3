@@ -1,0 +1,75 @@
+.table-manager {
+	position: relative;
+}
+
+.manager-panel-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 100;
+	padding: 5px 10px;
+	font-size: 16px;
+	background-color: #007bff7c;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.manager-panel-overlay {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.manager-panel {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px;
+	border: 1px solid #ccc;
+	z-index: 1000;
+}
+
+.manager-panel h2 {
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+}
+
+.manager-panel .close-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: gray;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 1.5rem;
+}
+
+.manager-panel .export-button {
+	margin-top: 20px;
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #007bff7c;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.manager-panel .manager-info {
+	margin-top: 20px;
+}
+
+.manager-panel .info-item {
+	margin-bottom: 10px;
+}

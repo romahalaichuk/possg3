@@ -1,0 +1,151 @@
+.payment-manager-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1100; /* Wyższy z-index niż dla MenuManager */
+}
+
+.payment-manager {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	max-width: 400px;
+	width: 100%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.payment-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.payment-header h2 {
+	margin: 0;
+}
+
+.close-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: gray;
+	font-size: 1.5rem;
+}
+
+.close-button:hover {
+	color: black;
+}
+
+.back-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: gray;
+	font-size: 1rem;
+}
+
+.back-button:hover {
+	color: black;
+}
+
+.cash-payment,
+.card-payment {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.cash-payment input {
+	width: calc(100% - 20px);
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.cash-payment button,
+.card-payment button {
+	padding: 10px 20px;
+	font-size: 16px;
+	border: none;
+	background-color: #28a745;
+	color: white;
+	cursor: pointer;
+	border-radius: 4px;
+	margin-top: 10px;
+}
+
+.finalize-button {
+	background-color: #dc3545;
+}
+
+.modal-content p {
+	margin: 10px 0;
+}
+
+.button-pay {
+	margin: 0 10px;
+	padding: 10px 20px;
+	font-size: 16px;
+	border: none;
+	background-color: #28a745;
+	color: white;
+	cursor: pointer;
+	border-radius: 4px;
+	margin-top: 10px;
+}
+
+.button-pay:hover {
+	background-color: #218838;
+}
+
+@media (max-width: 768px) {
+	.payment-manager {
+		padding: 15px;
+	}
+
+	.button-pay {
+		font-size: 14px;
+		padding: 8px 16px;
+	}
+
+	.close-button {
+		font-size: 1.2rem;
+	}
+
+	.back-button {
+		font-size: 0.9rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.payment-manager {
+		padding: 10px;
+	}
+
+	.payment-header h2 {
+		font-size: 1.2rem;
+	}
+
+	.button-pay {
+		font-size: 12px;
+		padding: 6px 12px;
+	}
+
+	.close-button {
+		font-size: 1rem;
+	}
+
+	.back-button {
+		font-size: 0.8rem;
+	}
+}

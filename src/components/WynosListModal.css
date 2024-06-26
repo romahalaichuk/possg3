@@ -1,0 +1,97 @@
+.wynos-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	padding: 10px;
+}
+
+.wynos-modal {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	max-width: 600px;
+	width: 100%;
+	max-height: 80vh;
+	overflow-y: auto;
+	text-align: center;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.wynos-modal h2 {
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+}
+
+.wynos-table-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
+}
+
+.button {
+	margin-top: 20px;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 5px;
+	font-size: 1.2rem;
+}
+
+.close-button:hover {
+	color: #555;
+}
+
+@media (max-width: 768px) {
+	.wynos-modal {
+		padding: 15px;
+	}
+
+	.wynos-table-list {
+		gap: 5px;
+	}
+
+	.button {
+		padding: 8px 16px;
+	}
+}
+
+@media (max-width: 480px) {
+	.wynos-modal {
+		padding: 10px;
+	}
+
+	.wynos-modal h2 {
+		font-size: 1.2rem;
+	}
+
+	.button {
+		padding: 6px 12px;
+		font-size: 0.9rem;
+	}
+
+	.close-button {
+		font-size: 1rem;
+	}
+}
