@@ -53,6 +53,8 @@ const TableManager = () => {
 			const initialTables = initializeTables(); // Tutaj użyj funkcji initializeTables
 			setTables(initialTables);
 			saveDataToLocalStorage(TABLES_STORAGE_KEY, initialTables);
+
+			initializeTables();
 		}
 
 		const storedWynosTables = loadDataFromLocalStorage(
