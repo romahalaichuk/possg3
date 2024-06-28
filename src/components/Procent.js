@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
 const Procent = ({ onClose, onSubmit }) => {
-	const [service, setService] = useState(0);
-	const [discount, setDiscount] = useState(0);
-	const [addToBill, setAddToBill] = useState(0);
-	const [subtractFromBill, setSubtractFromBill] = useState(0);
+	const [service, setService] = useState("");
+	const [discount, setDiscount] = useState("");
+	const [addToBill, setAddToBill] = useState("");
+	const [subtractFromBill, setSubtractFromBill] = useState("");
 
 	const handleSubmit = () => {
 		onSubmit({
-			service: parseFloat(service),
-			discount: parseFloat(discount), // Parsowanie do float
-			addToBill: parseFloat(addToBill),
-			subtractFromBill: parseFloat(subtractFromBill),
+			service: parseFloat(service) || 0,
+			discount: parseFloat(discount) || 0,
+			addToBill: parseFloat(addToBill) || 0,
+			subtractFromBill: parseFloat(subtractFromBill) || 0,
 		});
 		onClose();
 	};
@@ -25,7 +25,7 @@ const Procent = ({ onClose, onSubmit }) => {
 					type="number"
 					min="0"
 					value={service}
-					onChange={(e) => setService(parseFloat(e.target.value))}
+					onChange={(e) => setService(e.target.value)}
 				/>
 			</div>
 			<div className="input-row">
@@ -34,16 +34,17 @@ const Procent = ({ onClose, onSubmit }) => {
 					type="number"
 					min="0"
 					value={discount}
-					onChange={(e) => setDiscount(parseFloat(e.target.value))}
+					onChange={(e) => setDiscount(e.target.value)}
 				/>
 			</div>
+
 			<div className="input-row">
 				<label>Dodaj do rachunku</label>
 				<input
 					type="number"
 					min="0"
 					value={addToBill}
-					onChange={(e) => setAddToBill(parseFloat(e.target.value))}
+					onChange={(e) => setAddToBill(e.target.value)}
 				/>
 			</div>
 			<div className="input-row">
@@ -52,7 +53,7 @@ const Procent = ({ onClose, onSubmit }) => {
 					type="number"
 					min="0"
 					value={subtractFromBill}
-					onChange={(e) => setSubtractFromBill(parseFloat(e.target.value))}
+					onChange={(e) => setSubtractFromBill(e.target.value)}
 				/>
 			</div>
 			<div className="modal-buttons">

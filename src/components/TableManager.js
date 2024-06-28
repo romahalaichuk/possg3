@@ -11,7 +11,6 @@ const TABLES_STORAGE_KEY = "tables";
 const WYNOS_TABLES_STORAGE_KEY = "wynosTables";
 const MANAGER_PANEL_STATE_KEY = "managerPanelOpen";
 
-// Przenieś definicje funkcji tutaj, aby były dostępne w całym komponencie
 const initializeTables = () => {
 	const initialTables = [
 		{ id: 0, name: "Wynos", status: "special", products: [] },
@@ -50,7 +49,7 @@ const TableManager = () => {
 		if (storedTables) {
 			setTables(storedTables);
 		} else {
-			const initialTables = initializeTables(); // Tutaj użyj funkcji initializeTables
+			const initialTables = initializeTables();
 			setTables(initialTables);
 			saveDataToLocalStorage(TABLES_STORAGE_KEY, initialTables);
 
@@ -63,7 +62,7 @@ const TableManager = () => {
 		if (storedWynosTables) {
 			setWynosTables(storedWynosTables);
 		} else {
-			const initialWynosTables = initializeWynosTables(); // Tutaj użyj funkcji initializeWynosTables
+			const initialWynosTables = initializeWynosTables();
 			setWynosTables(initialWynosTables);
 			saveDataToLocalStorage(WYNOS_TABLES_STORAGE_KEY, initialWynosTables);
 		}

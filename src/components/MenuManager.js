@@ -66,9 +66,8 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 		});
 
 		const discountAmount = (adjustments.discount / 100) * totalAmount;
-		totalAmount -= discountAmount;
 
-		return { totalItems, totalAmount };
+		return { totalItems, totalAmount, discountAmount };
 	};
 
 	useEffect(() => {
@@ -275,6 +274,7 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 		setCurrentTableName(tableName);
 		resetTable();
 		onClose();
+
 		onClose(totalPrice, adjustments);
 	};
 
@@ -299,7 +299,8 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 		}
 	};
 
-	const { totalItems, totalAmount } = calculateTotalItemsAndAmount();
+	const { totalItems, totalAmount, discountAmount } =
+		calculateTotalItemsAndAmount();
 	const serviceCharge = (adjustments.service / 100) * totalAmount;
 	const calculateAdjustedTotal = () => {
 		let adjustedTotal = totalAmount;
@@ -325,7 +326,7 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 			adjustedTotal -= adjustments.subtractFromBill;
 		}
 
-		return adjustedTotal.toFixed(2); // Zaokrąglenie do 2 miejsc po przecinku
+		return adjustedTotal;
 	};
 
 	return (
@@ -438,7 +439,7 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 					</ul>
 
 					<p>Liczba pozycji: {totalItems}</p>
-					<p>Suma: {calculateAdjustedTotal()} zł</p>
+					<p>Suma: {calculateAdjustedTotal().toFixed(2)} zł</p>
 
 					{/* Wyświetlanie informacji o zastosowanych modyfikacjach */}
 					{adjustments.service > 0 && (
@@ -448,9 +449,10 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 						</p>
 					)}
 					{adjustments.discount > 0 && (
-						<p>
-							Zastosowano {adjustments.discount.toFixed(2)}% zniżki (-{" "}
-							{((adjustments.discount / 100) * totalAmount).toFixed(2)} zł)
+						<p style={{ color: "blue" }}>
+							Zastosowano {adjustments.discount.toFixed(2)} % zniżki (-{" "}
+							{discountAmount.toFixed(2)} zł), do zapłaty:{" "}
+							{(totalAmount - discountAmount).toFixed(2)} zł
 						</p>
 					)}
 
