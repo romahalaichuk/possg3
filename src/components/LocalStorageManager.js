@@ -1,5 +1,8 @@
+// LocalStorageManager.js
+
+// Functions to manage selected items and extras
 export const getSelectedItems = (tableName) => {
-	const storedItems = localStorage.getItem(tableName);
+	const storedItems = localStorage.getItem(`${tableName}_items`);
 	return storedItems ? JSON.parse(storedItems) : [];
 };
 
@@ -28,7 +31,7 @@ export const addSelectedItem = (
 		});
 	}
 
-	localStorage.setItem(tableName, JSON.stringify(selectedItems));
+	localStorage.setItem(`${tableName}_items`, JSON.stringify(selectedItems));
 };
 
 export const removeSelectedItem = (tableName, productId) => {
@@ -42,15 +45,15 @@ export const removeSelectedItem = (tableName, productId) => {
 		})
 		.filter((item) => item.quantity > 0);
 
-	localStorage.setItem(tableName, JSON.stringify(updatedItems));
+	localStorage.setItem(`${tableName}_items`, JSON.stringify(updatedItems));
 };
 
 export const clearSelectedItems = (tableName) => {
-	localStorage.removeItem(tableName);
+	localStorage.removeItem(`${tableName}_items`);
 };
 
 export const updateSelectedItems = (tableName, items) => {
-	localStorage.setItem(tableName, JSON.stringify(items));
+	localStorage.setItem(`${tableName}_items`, JSON.stringify(items));
 };
 
 export const addExtraToItem = (tableName, productId, extra) => {
@@ -63,7 +66,7 @@ export const addExtraToItem = (tableName, productId, extra) => {
 			item.extras = [];
 		}
 		item.extras.push(extra);
-		localStorage.setItem(tableName, JSON.stringify(selectedItems));
+		localStorage.setItem(`${tableName}_items`, JSON.stringify(selectedItems));
 	}
 };
 
@@ -74,6 +77,19 @@ export const removeExtraFromItem = (tableName, productId, extraId) => {
 	if (itemIndex !== -1) {
 		const item = selectedItems[itemIndex];
 		item.extras = item.extras.filter((extra) => extra.id !== extraId);
-		localStorage.setItem(tableName, JSON.stringify(selectedItems));
+		localStorage.setItem(`${tableName}_items`, JSON.stringify(selectedItems));
 	}
+};
+
+// Functions to manage table status
+export const getTableStatus = (tableName) => {
+	return localStorage.getItem(`${tableName}_status`) || "free";
+};
+
+export const setTableStatus = (tableName, status) => {
+	localStorage.setItem(`${tableName}_status`, status);
+};
+
+export const clearTableStatus = (tableName) => {
+	localStorage.removeItem(`${tableName}_status`);
 };
