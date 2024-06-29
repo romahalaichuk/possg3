@@ -5,7 +5,6 @@ import Modal from "./Modal";
 import MenuManager from "./MenuManager";
 import WynosListModal from "./WynosListModal";
 import ManagerPanel from "./ManagerPanel";
-import "./TableManager.css";
 
 const TABLES_STORAGE_KEY = "tables";
 const WYNOS_TABLES_STORAGE_KEY = "wynosTables";
@@ -26,7 +25,7 @@ const initializeTables = () => {
 
 const initializeWynosTables = () => {
 	const initialWynosTables = Array.from({ length: 20 }, (_, index) => ({
-		id: index + 40,
+		id: index + 46, // Ensure no id collision with regular tables
 		name: `Wynos ${index + 1}`,
 		status: "free",
 		products: [],
@@ -52,8 +51,6 @@ const TableManager = () => {
 			const initialTables = initializeTables();
 			setTables(initialTables);
 			saveDataToLocalStorage(TABLES_STORAGE_KEY, initialTables);
-
-			initializeTables();
 		}
 
 		const storedWynosTables = loadDataFromLocalStorage(

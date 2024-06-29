@@ -267,14 +267,23 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 	};
 
 	const handlePaymentComplete = () => {
+		// Update local storage to include the table name in the served wynos tables list
+		let servedWynosTables =
+			JSON.parse(localStorage.getItem("servedWynosTables")) || [];
+		if (!servedWynosTables.includes(tableName)) {
+			servedWynosTables.push(tableName);
+			localStorage.setItem(
+				"servedWynosTables",
+				JSON.stringify(servedWynosTables)
+			);
+		}
+
 		clearSelectedItems(tableName);
 		setSelectedItems([]);
 		setShowPaymentModal(false);
 		setTableStatus("free");
 		setCurrentTableName(tableName);
 		resetTable();
-		onClose();
-
 		onClose(totalPrice, adjustments);
 	};
 
@@ -344,8 +353,7 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 							{category}
 						</button>
 					))}
-					<button onClick={handleOpenProcentModal}>%</button>{" "}
-					{/* Przycisk otwierający Procent modal */}
+					<button onClick={handleOpenProcentModal}>%</button> {}
 				</div>
 				<div className="search-bar" ref={searchBarRef}>
 					<input
@@ -441,7 +449,7 @@ const MenuManager = ({ tableName, onClose, onAddProduct, resetTable }) => {
 					<p>Liczba pozycji: {totalItems}</p>
 					<p>Suma: {calculateAdjustedTotal().toFixed(2)} zł</p>
 
-					{/* Wyświetlanie informacji o zastosowanych modyfikacjach */}
+					{}
 					{adjustments.service > 0 && (
 						<p style={{ color: "red" }}>
 							Zastosowano {adjustments.service}% serwisu (+{" "}

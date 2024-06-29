@@ -8,8 +8,13 @@ import {
 import jsPDF from "jspdf";
 
 const ManagerPanel = ({ tables = [], wynosTables = [], onClose }) => {
-	const totalTablesDuringDay = calculateTotalTablesDuringDay(tables);
-	const totalWynos = calculateTotalWynos(wynosTables);
+	// Retrieve the list of served tables and served wynos tables from local storage
+	const servedTables = JSON.parse(localStorage.getItem("servedTables")) || [];
+	const servedWynosTables =
+		JSON.parse(localStorage.getItem("servedWynosTables")) || [];
+
+	const totalTablesDuringDay = servedTables.length; // Number of served tables
+	const totalWynos = servedWynosTables.length; // Number of served wynos
 	const totalAmount = calculateTotalAmount(tables, wynosTables);
 
 	const handleExportToPDF = () => {
@@ -30,10 +35,10 @@ const ManagerPanel = ({ tables = [], wynosTables = [], onClose }) => {
 
 		doc.save(`panel_managera_${dateString}.pdf`);
 
-		// Wyczyszczenie localStorage
+		// Clear localStorage
 		localStorage.clear();
 
-		// Odświeżenie strony
+		// Refresh the page
 		window.location.reload();
 	};
 
@@ -49,7 +54,8 @@ const ManagerPanel = ({ tables = [], wynosTables = [], onClose }) => {
 					{totalTablesDuringDay}
 				</div>
 				<div className="info-item">
-					<strong>Łączna liczba wynosów:</strong> {totalWynos}
+					<strong>Łączna liczba stolików i wynosów (opłaconych):</strong>{" "}
+					{totalWynos}
 				</div>
 				<div className="info-item">
 					<strong>Łączna kwota:</strong> {totalAmount} PLN
