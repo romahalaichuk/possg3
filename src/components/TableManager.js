@@ -5,33 +5,11 @@ import Modal from "./Modal";
 import MenuManager from "./MenuManager";
 import WynosListModal from "./WynosListModal";
 import ManagerPanel from "./ManagerPanel";
+import "./TableManager.css";
 
 const TABLES_STORAGE_KEY = "tables";
 const WYNOS_TABLES_STORAGE_KEY = "wynosTables";
 const MANAGER_PANEL_STATE_KEY = "managerPanelOpen";
-
-const initializeTables = () => {
-	const initialTables = [
-		{ id: 0, name: "Wynos", status: "special", products: [] },
-		...Array.from({ length: 45 }, (_, index) => ({
-			id: index + 1,
-			name: `Table ${index + 1}`,
-			status: "free",
-			products: [],
-		})),
-	];
-	return initialTables;
-};
-
-const initializeWynosTables = () => {
-	const initialWynosTables = Array.from({ length: 20 }, (_, index) => ({
-		id: index + 46, // Ensure no id collision with regular tables
-		name: `Wynos ${index + 1}`,
-		status: "free",
-		products: [],
-	}));
-	return initialWynosTables;
-};
 
 const TableManager = () => {
 	const [tables, setTables] = useState([]);
@@ -48,9 +26,7 @@ const TableManager = () => {
 		if (storedTables) {
 			setTables(storedTables);
 		} else {
-			const initialTables = initializeTables();
-			setTables(initialTables);
-			saveDataToLocalStorage(TABLES_STORAGE_KEY, initialTables);
+			initializeTables();
 		}
 
 		const storedWynosTables = loadDataFromLocalStorage(
@@ -59,9 +35,7 @@ const TableManager = () => {
 		if (storedWynosTables) {
 			setWynosTables(storedWynosTables);
 		} else {
-			const initialWynosTables = initializeWynosTables();
-			setWynosTables(initialWynosTables);
-			saveDataToLocalStorage(WYNOS_TABLES_STORAGE_KEY, initialWynosTables);
+			initializeWynosTables();
 		}
 
 		const storedManagerPanelState = loadDataFromLocalStorage(
@@ -71,6 +45,31 @@ const TableManager = () => {
 			setManagerPanelOpen(storedManagerPanelState === "true");
 		}
 	}, []);
+
+	const initializeTables = () => {
+		const initialTables = [
+			{ id: 0, name: "Wynos", status: "special", products: [] },
+			...Array.from({ length: 45 }, (_, index) => ({
+				id: index + 1,
+				name: `Table ${index + 1}`,
+				status: "free",
+				products: [],
+			})),
+		];
+		setTables(initialTables);
+		saveDataToLocalStorage(TABLES_STORAGE_KEY, initialTables);
+	};
+
+	const initializeWynosTables = () => {
+		const initialWynosTables = Array.from({ length: 20 }, (_, index) => ({
+			id: index + 40,
+			name: `Wynos ${index + 1}`,
+			status: "free",
+			products: [],
+		}));
+		setWynosTables(initialWynosTables);
+		saveDataToLocalStorage(WYNOS_TABLES_STORAGE_KEY, initialWynosTables);
+	};
 
 	const saveDataToLocalStorage = (key, data) => {
 		localStorage.setItem(key, JSON.stringify(data));

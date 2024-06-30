@@ -18,7 +18,7 @@ const WynosListModal = ({ tables, onClose, onTableClick }) => {
 							name={table.name}
 							status={table.status}
 							products={table.products}
-							onTableClick={() => onTableClick(table.id)}
+							onTableClick={onTableClick}
 						/>
 					))}
 				</div>

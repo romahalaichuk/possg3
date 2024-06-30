@@ -1,5 +1,3 @@
-// ManagerPanelFunctions.js
-
 export const calculateTotalTablesDuringDay = (tables) => {
 	const occupiedTables = tables.filter(
 		(table) =>
@@ -18,35 +16,34 @@ export const calculateTotalWynos = (wynosTables) => {
 };
 
 export const calculateTotalAmount = (tables, wynosTables) => {
-	const totalAmountTables = tables.reduce((accumulator, table) => {
-		if (
+	const occupiedTables = tables.filter(
+		(table) =>
 			table.status === "occupied" ||
 			table.status === "paid" ||
 			table.status === "paid-card"
-		) {
-			return (
-				accumulator +
-				table.products.reduce((acc, product) => acc + product.price, 0)
-			);
-		}
-		return accumulator;
-	}, 0);
+	);
+	const totalAmountTables = occupiedTables.reduce(
+		(accumulator, currentTable) =>
+			accumulator +
+			currentTable.products.reduce(
+				(accumulator, product) => accumulator + product.price,
+				0
+			),
+		0
+	);
 
-	const totalAmountWynos = wynosTables.reduce((accumulator, table) => {
-		if (table.status === "occupied") {
-			return (
-				accumulator +
-				table.products.reduce((acc, product) => acc + product.price, 0)
-			);
-		}
-		return accumulator;
-	}, 0);
+	const occupiedWynos = wynosTables.filter(
+		(table) => table.status === "occupied"
+	);
+	const totalAmountWynos = occupiedWynos.reduce(
+		(accumulator, currentTable) =>
+			accumulator +
+			currentTable.products.reduce(
+				(accumulator, product) => accumulator + product.price,
+				0
+			),
+		0
+	);
 
 	return totalAmountTables + totalAmountWynos;
-};
-
-export const calculateAdjustedTotal = () => {
-	// Tutaj umieść logikę do obliczania sumy na podstawie swoich potrzeb
-	// Na przykład, mogą to być jakieś dodatkowe obliczenia, modyfikacje, itp.
-	return 0; // Zwracamy wartość obliczoną w funkcji
 };

@@ -5,7 +5,7 @@ import { products } from "./Produkt";
 const PizzaModal = ({ selectedSize, onClose, onAddPizza }) => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [filteredPizzas, setFilteredPizzas] = useState([]);
-	const [setSelectedPizza] = useState(null);
+	const [selectedPizza, setSelectedPizza] = useState(null);
 
 	const modalRef = useRef(null);
 
